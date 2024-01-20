@@ -1,29 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:truck_booking/core/app_export.dart';
 
-// ignore: must_be_immutable
-class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
-  CustomAppBar(
-      {required this.height,
-      this.styleType,
-      this.leadingWidth,
-      this.leading,
-      this.title,
-      this.centerTitle,
-      this.actions});
+mixin CustomPreferredSizeMixin on Widget {
+  Size get customPreferredSize;
+}
+
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  CustomAppBar({
+    required this.height,
+    this.styleType,
+    this.leadingWidth,
+    this.leading,
+    this.title,
+    this.centerTitle,
+    this.actions,
+  });
 
   double height;
-
   Style? styleType;
-
   double? leadingWidth;
-
   Widget? leading;
-
   Widget? title;
-
   bool? centerTitle;
-
   List<Widget>? actions;
 
   @override
@@ -45,9 +43,10 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
 
   @override
   Size get preferredSize => Size(
-        size.width,
-        height,
-      );
+    0, // Provide the appropriate width value here
+    height,
+  );
+
   _getStyle() {
     switch (styleType) {
       case Style.bgFillWhiteA700:
